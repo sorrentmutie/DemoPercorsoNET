@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="TaskParallelLibrary" Version="1.0.2856" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Cotrap.Core\Cotrap.Core.csproj" />
   </ItemGroup>
 

@@ -2,6 +2,7 @@
 using Cotrap.Core.Allenamento;
 using Cotrap.Core.RandomUserMe.Interfacce;
 using Cotrap.Core.RandomUserMe;
+using Cotrap.Core.AnalisiTesto;
 using System.Net;
 using System.Xml;
 
@@ -75,18 +76,19 @@ using System.Xml;
 
 //Console.WriteLine("Fine del programma");
 
-////var x = Download().GetAwaiter().GetResult();
+//var x = Download().GetAwaiter().GetResult();
+var analisi = new Analisi("");
+var urls = new List<string>() { "https://www.nuget.org/packages/TaskParallelLibrary/", "https://www.ansa.it/", "https://sitasudtrasporti.it/"};
+
+foreach (var url in urls)
+{
+    var contenuto = await Download(url);
+    var pl = analisi.ParolaPiuLungaDaTesto(contenuto);
+
+    Console.WriteLine($"Parola..... {pl}");
+}
 //var testo = await Download();
 //Console.WriteLine(testo);
-
-
-
-//void FaiQualcosa()
-//{
-//    Console.WriteLine("Esecuzione del task");
-//    Thread.Sleep(5000);
-//    Console.WriteLine("Fine del task");
-//}
 
 //async Task<string> Download()
 //{
@@ -105,3 +107,9 @@ if(data is not null && data.Results is not null && data.Results.Length > 0)
     Console.WriteLine($"Email: {person.email} {person.name.first} {person.name.last}");
 }
 
+async Task<string> Download(string url)
+{
+    var downloader = new WebClient();
+    var t = await downloader.DownloadStringTaskAsync(url);
+    return t;
+}

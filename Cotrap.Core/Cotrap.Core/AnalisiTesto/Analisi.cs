@@ -25,7 +25,7 @@ public class Analisi
     }
 
     
-    public async Task<string> ParolaPiuLungaASync()
+    public async Task<string> ParolaPiuLungaAsync()
     {
         using StreamReader sr = new StreamReader(path);
         var testo = await sr.ReadToEndAsync();
@@ -37,6 +37,11 @@ public class Analisi
         using StreamReader sr = new StreamReader(path);
         testo = await sr.ReadToEndAsync();
         return testo.TrovaParolePiuFrequenti(n);
+    }
+
+    public string ParolaPiuLungaDaTesto(string testo)
+    {
+        return testo.ParolaPiuLunga();
     }
 
 }
