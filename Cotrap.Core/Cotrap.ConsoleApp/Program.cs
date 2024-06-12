@@ -1,5 +1,7 @@
 ﻿
 using Cotrap.Core.Allenamento;
+using Cotrap.Core.RandomUserMe.Interfacce;
+using Cotrap.Core.RandomUserMe;
 using System.Net;
 using System.Xml;
 
@@ -65,29 +67,41 @@ using System.Xml;
 
 #endregion
 
+#region "Codice commentato"
 //var t1 = new Task(FaiQualcosa);
 //var t2 = t1.ContinueWith( (t)  => { Console.WriteLine("Secondo Task"); } );
 //t1.Start();
 //Task.WaitAll(t1, t2);
 
-Console.WriteLine("Fine del programma");
+//Console.WriteLine("Fine del programma");
 
-//var x = Download().GetAwaiter().GetResult();
-var testo = await Download();
-Console.WriteLine(testo);
+////var x = Download().GetAwaiter().GetResult();
+//var testo = await Download();
+//Console.WriteLine(testo);
 
 
 
-void FaiQualcosa()
+//void FaiQualcosa()
+//{
+//    Console.WriteLine("Esecuzione del task");
+//    Thread.Sleep(5000);
+//    Console.WriteLine("Fine del task");
+//}
+
+//async Task<string> Download()
+//{
+//    var downloader = new WebClient();
+//    var t = await downloader.DownloadStringTaskAsync("http://www.google.com");
+//    return t;
+//}
+#endregion
+
+
+IRandomUserData randomUserData = new ServizioDatiHttp();
+var data = await randomUserData.GetRandomUserData();
+if(data is not null && data.Results is not null && data.Results.Length > 0)
 {
-    Console.WriteLine("Esecuzione del task");
-    Thread.Sleep(5000);
-    Console.WriteLine("Fine del task");
+    var person = data.Results[0];
+    Console.WriteLine($"Email: {person.email} {person.name.first} {person.name.last}");
 }
 
-async Task<string> Download()
-{
-    var downloader = new WebClient();
-    var t = await downloader.DownloadStringTaskAsync("http://www.google.com");
-    return t;
-}

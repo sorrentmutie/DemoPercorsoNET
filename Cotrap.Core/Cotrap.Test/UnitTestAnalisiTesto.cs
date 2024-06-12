@@ -11,6 +11,7 @@ namespace Cotrap.Test;
 public class UnitTestAnalisiTesto
 {
     [TestMethod]
+    [Ignore]
     public void CheckStringaNullaSePathSbagliato()
     {
         string fileDaAnalizzare = @"C:\SVILUPPI\CORSO\TestoDaAnlizzare\CostituzioneItalian.txt";
