@@ -20,27 +20,37 @@ Console.WriteLine($"Current Thread: {Thread.CurrentThread.ManagedThreadId}");
 Console.WriteLine($"Main Program: {Thread.CurrentThread.IsBackground}");
 
 var pathFiles = new string[] { fileCostituzione, fileMaggio, fileUS };
+
 for (int i = 0; i < 3; i++)
 {
-    ThreadPool.QueueUserWorkItem(new WaitCallback(EsaminaTesto), pathFiles[i]);
+   // ThreadPool.QueueUserWorkItem(new WaitCallback(EsaminaTesto), pathFiles[i]);
+   var parolaPiuLunga = await EsaminaTestoAsync(pathFiles[i]);
+   Console.WriteLine(parolaPiuLunga);
 }
 
 
-Console.WriteLine("Fine dell'esecuzione");
-Console.ReadLine();
-
-
-void EsaminaTesto(object? path)
+async Task<string> EsaminaTestoAsync(string path)
 {
-    var id = Thread.CurrentThread.ManagedThreadId;
-    Console.WriteLine($"Path = {path}");   
-    Console.WriteLine($"Ciao sto leggendo {id} {Thread.CurrentThread.IsBackground}");
-    if (path is not null)
-    {
-        Analisi analisi = new Analisi((string)path);
-        var parolaLunga = analisi.ParolaPiuLunga();
-        Console.WriteLine($"Parola più lunga: {parolaLunga} del thread: {id}");
-        Console.WriteLine($"Ho finito di fare qualcosa  {id}");
-    }
+    Analisi analisi = new Analisi((string)path);
+    return await analisi.ParolaPiuLungaASync();
 }
+
+
+//Console.WriteLine("Fine dell'esecuzione");
+//Console.ReadLine();
+
+
+//void EsaminaTesto(object? path)
+//{
+//    var id = Thread.CurrentThread.ManagedThreadId;
+//    Console.WriteLine($"Path = {path}");   
+//    Console.WriteLine($"Ciao sto leggendo {id} {Thread.CurrentThread.IsBackground}");
+//    if (path is not null)
+//    {
+//        Analisi analisi = new Analisi((string)path);
+//        var parolaLunga = analisi.ParolaPiuLunga();
+//        Console.WriteLine($"Parola più lunga: {parolaLunga} del thread: {id}");
+//        Console.WriteLine($"Ho finito di fare qualcosa  {id}");
+//    }
+//}
 
