@@ -5,6 +5,8 @@ using Cotrap.Core.RandomUserMe;
 using Cotrap.Core.AnalisiTesto;
 using System.Net;
 using System.Xml;
+using Cotrap.Core.Reqres.Interfacce;
+using Cotrap.Core.Reqres;
 
 //var myClock = new CotrapClock();
 //var ospiti = new GestioneOspitiDatabase(myClock);
@@ -77,16 +79,16 @@ using System.Xml;
 //Console.WriteLine("Fine del programma");
 
 //var x = Download().GetAwaiter().GetResult();
-var analisi = new Analisi("");
-var urls = new List<string>() { "https://www.nuget.org/packages/TaskParallelLibrary/", "https://www.ansa.it/", "https://sitasudtrasporti.it/"};
+//var analisi = new Analisi("");
+//var urls = new List<string>() { "https://www.nuget.org/packages/TaskParallelLibrary/", "https://www.ansa.it/", "https://sitasudtrasporti.it/"};
 
-foreach (var url in urls)
-{
-    var contenuto = await Download(url);
-    var pl = analisi.ParolaPiuLungaDaTesto(contenuto);
+//foreach (var url in urls)
+//{
+//    var contenuto = await Download(url);
+//    var pl = analisi.ParolaPiuLungaDaTesto(contenuto);
 
-    Console.WriteLine($"Parola..... {pl}");
-}
+//    Console.WriteLine($"Parola..... {pl}");
+//}
 //var testo = await Download();
 //Console.WriteLine(testo);
 
@@ -99,17 +101,45 @@ foreach (var url in urls)
 #endregion
 
 
-IRandomUserData randomUserData = new ServizioDatiHttp();
-var data = await randomUserData.GetRandomUserData();
-if(data is not null && data.Results is not null && data.Results.Length > 0)
+
+
+
+//IRandomUserData randomUserData = new ServizioDatiHttp();
+//var data = await randomUserData.GetRandomUserData();
+//if(data is not null && data.Results is not null && data.Results.Length > 0)
+//{
+//    var person = data.Results[0];
+//    Console.WriteLine($"Email: {person.email} {person.name.first} {person.name.last}");
+//}
+
+//async Task<string> Download(string url)
+//{
+//    var downloader = new WebClient();
+//    var t = await downloader.DownloadStringTaskAsync(url);
+//    return t;
+//}
+
+
+
+
+HttpClient httpClient = new HttpClient();
+httpClient.BaseAddress = new Uri("https://reqres.in/api/users?page=2");
+IReqres reqres = new ReqresHttpService(httpClient);
+
+//var dataReqres = await reqres.GetReqresData();
+//if (dataReqres is not null)
+//{
+//    var people = dataReqres.data;
+//    foreach (var person in people)
+//    {
+//        Console.WriteLine($"{person.first_name} {person.last_name}");
+//    }
+//}
+
+var people = await reqres.GetPeopleAsync();
+if(people is null) return;
+foreach (var person in people)
 {
-    var person = data.Results[0];
-    Console.WriteLine($"Email: {person.email} {person.name.first} {person.name.last}");
+    Console.WriteLine($"{person.first_name} {person.last_name}");
 }
 
-async Task<string> Download(string url)
-{
-    var downloader = new WebClient();
-    var t = await downloader.DownloadStringTaskAsync(url);
-    return t;
-}
