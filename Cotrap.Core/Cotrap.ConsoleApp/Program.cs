@@ -7,6 +7,7 @@ using System.Net;
 using System.Xml;
 using Cotrap.Core.Reqres.Interfacce;
 using Cotrap.Core.Reqres;
+using System;
 
 //var myClock = new CotrapClock();
 //var ospiti = new GestioneOspitiDatabase(myClock);
@@ -105,7 +106,10 @@ using Cotrap.Core.Reqres;
 
 
 //IRandomUserData randomUserData = new ServizioDatiHttp();
-//var data = await randomUserData.GetRandomUserData();
+//var vmPersona = await randomUserData.GetViewModelPersona();
+//if (vmPersona == null) return;
+//Console.WriteLine($"{vmPersona.NomeCompleto} {vmPersona.DataDiNascita} {vmPersona.Indirizzo}");
+
 //if(data is not null && data.Results is not null && data.Results.Length > 0)
 //{
 //    var person = data.Results[0];
@@ -126,7 +130,20 @@ HttpClient httpClient = new HttpClient();
 httpClient.BaseAddress = new Uri("https://reqres.in/api/users?page=2");
 IReqres reqres = new ReqresHttpService(httpClient);
 
-//var dataReqres = await reqres.GetReqresData();
+var vm = await reqres.GetPeopleViewModel();
+if (vm is null) return;
+foreach (var person in vm)
+{
+    Console.WriteLine($"{person.NomeCompleto} {person.Indirizzo}");
+}
+
+
+await reqres.RegisterPerson(
+    new RegisterVM { email = "qwert@gmail.com", password = "Password1234!" });
+
+
+
+
 //if (dataReqres is not null)
 //{
 //    var people = dataReqres.data;
@@ -136,10 +153,10 @@ IReqres reqres = new ReqresHttpService(httpClient);
 //    }
 //}
 
-var people = await reqres.GetPeopleAsync();
-if(people is null) return;
-foreach (var person in people)
-{
-    Console.WriteLine($"{person.first_name} {person.last_name}");
-}
+//var people = await reqres.GetPeopleAsync();
+//if(people is null) return;
+//foreach (var person in people)
+//{
+//    Console.WriteLine($"{person.first_name} {person.last_name}");
+//}
 

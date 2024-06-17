@@ -30,6 +30,12 @@ app.MapGet("/", async (IGestioneAtleta gestioneAtleta, IRandomUserData randomUse
     var response = await randomUserData.GetRandomUserData();
     var peopleData = await reqres.GetPeopleAsync();
 
+    await reqres.RegisterPerson(new RegisterVM
+    {
+        email = "prova@gmail.com",
+        password = "Password1234!"
+    });
+
     //if (response is null)
     //{
     //    return $"Hello World! {conteggio}";

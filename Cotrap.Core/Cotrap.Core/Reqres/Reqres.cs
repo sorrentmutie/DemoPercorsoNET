@@ -24,3 +24,8 @@ public class Person
     public string last_name { get; set; }
     public string avatar { get; set; }
 }
+
+public class RegistrationResponse {
+    public string? id { get; set; }
+    public string? token { get; set; }
+}
