@@ -1,79 +1,116 @@
 ﻿using Cotrap.Core;
 using Cotrap.Core.AnalisiTesto;
 
-string fileCostituzione = @"C:\SVILUPPI\CORSO\TestoDaAnlizzare\CostituzioneItaliana.txt";
-string fileMaggio = @"C:\SVILUPPI\CORSO\TestoDaAnlizzare\5Maggio.txt";
-string fileUS = @"C:\SVILUPPI\CORSO\TestoDaAnlizzare\us_constitution.json";
 
-//Analisi analisi = new Analisi(fileDaAnalizzare);
-//var DizionarioParole = analisi.TrovaParolePiuFrequenti(10);
-//var parolaLunga = analisi.ParolaPiuLunga();
-//foreach(var entry in DizionarioParole)
+Console.WriteLine("Ciao");
+var x = Utility.MioMinimo(5, 6);
+var y = Utility.MioMinimo("ciao", "mondo"); 
+
+Console.WriteLine(y);
+
+
+void DoSomething()
+{
+    //Studente s = new Studente();
+    // s.Nome = "Mario";
+    //var s = new Studente { Nome = "Mario" };
+
+    //var t = new { Nome = "Mario", Cognome = "Rossi" };  
+    var numeri = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    var numeriMaggioriCinque = numeri.MioFindSpeciale();
+    var numeriMaggioriSette = numeri.MioFindSpeciale2(7);
+    var numeriMaggioriOtto = numeri.MioSuperFind(NumeroSpeciale);
+
+}
+
+bool NumeroSpeciale(int n)
+{
+    return n > 8;
+}
+
+
+int Somma(int a, int b)
+{
+    return a + b;
+}
+
+int SommaQuadratica(int a, int b)
+{
+    return a*a + b*b;
+}
+
+Func<int, int, int> somma = SommaQuadratica;
+int risultato = somma(5, 6);
+
+List<int> MiaLista = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+//var numeriPari = MiaLista.FindAll(NumeroPari);
+// Predicate<int>
+// public delegate bool Predicate<T> (T obj);
+//bool NumeroPari(int x)
 //{
-//    Console.WriteLine($"{entry.Key} {entry.Value}");
-
+//    return x % 2 == 0;
 //}
 
+//var numeriPari = MiaLista.FindAll(delegate(int n) { return n % 2 == 0; });
+//var numeroPari = MiaLista.FindAll( (int n) => { return n % 2 == 0; } );
+//var numeroPari = MiaLista.FindAll( n => { return n % 2 == 0; });
+var numeroPari = MiaLista.FindAll(n =>  n % 2 == 0);
+
+class Utility
+{
+    public static T MioMinimo<T>(T a, T b) where T : IComparable<T>
+    {
+        if (a.CompareTo(b) < 0)
+        {
+            return a;
+        }
+        return b;
+    }
+}
+
+//public delegate TResult Func<T1,T2, TResult> (T1 arg1, T2 arg2);
 
 
-//Console.WriteLine($"Current Thread: {Thread.CurrentThread.ManagedThreadId}");
-//Console.WriteLine($"Main Program: {Thread.CurrentThread.IsBackground}");
 
-//var pathFiles = new string[] { fileCostituzione, fileMaggio, fileUS };
-
-//for (int i = 0; i < 3; i++)
-//{
-//   // ThreadPool.QueueUserWorkItem(new WaitCallback(EsaminaTesto), pathFiles[i]);
-//   var parolaPiuLunga = await EsaminaTestoAsync(pathFiles[i]);
-//   Console.WriteLine(parolaPiuLunga);
-//}
-
-
-//async Task<string> EsaminaTestoAsync(string path)
-//{
-//    Analisi analisi = new Analisi((string)path);
-//    return await analisi.ParolaPiuLungaAsync();
-//}
+public class Studente
+{
+    private string? _nome;
+    public string? Nome     {
+        get
+        {
+            return _nome;
+        }
+        set
+        {
+            _nome = value;
+        }
+    }
 
 
-//for (int i = 0; i < 10; i++)
-//{
-//    var numeroRandom = await RandomIntAsync();
-//    Console.WriteLine(numeroRandom);
-//}
+    //public string Nome { get; set; }
+    
+}
 
-//Parallel.For(1, 100, (i) => { Console.WriteLine(i); });
-//Parallel.For(1, 100, (i) => {
-//    Random r = new Random();
-//    var x = r.Next(0, 9);
-//    Thread.Sleep(r.Next(1000, 10000));
-//    Console.WriteLine($"{i} {x}");
-//});
+public static class MieEstensioni
+{
+    public static List<int> MioFindSpeciale(this List<int> lista)
+    {
+        return lista.FindAll(n => n > 5);
+    }
 
-//Task<int> RandomIntAsync()
-//{
-//    Random r = new Random();
-//    var x = r.Next(0, 9);
-//    Thread.Sleep(2000);
-//    return Task.FromResult(x);
-//}
+    public static List<int> MioFindSpeciale2(this List<int> lista, int soglia)
+    {
+        return lista.FindAll(n => n > soglia);
+    }
 
+    public static List<int> MioSuperFind(this List<int> lista, Predicate<int> mioFunc)
+    {
+        return lista.FindAll(mioFunc);
+    }
 
-//Console.WriteLine("Fine dell'esecuzione");
-//Console.ReadLine();
+    
+}
 
 
-//void EsaminaTesto(object? path)
-//{
-//    var id = Thread.CurrentThread.ManagedThreadId;
-//    Console.WriteLine($"Path = {path}");   
-//    Console.WriteLine($"Ciao sto leggendo {id} {Thread.CurrentThread.IsBackground}");
-//    if (path is not null)
-//    {
-//        Analisi analisi = new Analisi((string)path);
-//        var parolaLunga = analisi.ParolaPiuLunga();
-//        Console.WriteLine($"Parola più lunga: {parolaLunga} del thread: {id}");
-//        Console.WriteLine($"Ho finito di fare qualcosa  {id}");
-//    }
-//}
 
