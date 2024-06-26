@@ -1,7 +1,7 @@
-﻿using Cotrap.ConsoleApp;
-using Cotrap.Core.Impiegati.Interfacce;
+﻿//using Cotrap.ConsoleApp;
+//using Cotrap.Core.Impiegati.Interfacce;
 
-Console.WriteLine("Ciao");
+//Console.WriteLine("Ciao");
 
 //var impiegati = new List<Impiegato>()
 //{ new Impiegato {  Cognome = "Rossi", DataNascita = DateTime.Today.AddYears(-30) , Nome = "Mario",
@@ -19,12 +19,21 @@ Console.WriteLine("Ciao");
 //        .OrderBy(i => i.DataNascita)
 //        .Select(i => new { NomeCompleto = i.Nome + " " + i.Cognome,  Nascita = i.DataNascita });
 
-IGestioneImpiegati gestioneImpiegati = new GestioneOperativi();
-var operativi = gestioneImpiegati.GetImpiegatiOperativi();
+//IGestioneImpiegati gestioneImpiegati = new GestioneOperativi();
+//var operativi = gestioneImpiegati.GetImpiegatiOperativi();
 
-foreach (var item in operativi)
-{
-    Console.WriteLine($"{item.Nome} {item.Cognome} - {item.DataNascita}");
-}
+//foreach (var item in operativi)
+//{
+//    Console.WriteLine($"{item.Nome} {item.Cognome} - {item.DataNascita}");
+//}
 
+using Cotrap.Core.VideoGame.Implementations;
+using Cotrap.Core.VideoGame.Interfaces;
+IVisible visible = new Visible();
+ICollidable collidable = new Solid();
+IUpdatable updatable = new Movable();
 
+var heman = new Warrior(visible, collidable, updatable);
+heman.Paint();
+heman.Collide();
+heman.Update();
