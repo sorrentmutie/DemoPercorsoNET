@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Cotrap.Core.Interfacce;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cotrap.Entity.CodeFirst;
 
-public class Blog
+public class Blog: IEntity<int>
 {
     public int Id { get; set; }
     public string? Url { get; set; }
