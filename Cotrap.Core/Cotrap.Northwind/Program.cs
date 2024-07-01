@@ -1,19 +1,46 @@
 ﻿
 
-using Microsoft.EntityFrameworkCore;
+using Cotrap.Core.Interfacce;
+using Cotrap.Data.Models;
+using Cotrap.Northwind;
 
 NorthwindContext context = new NorthwindContext();
-ICustomersNorthwindData data =
-    new CustomersNorthwindSQlServerData(context);
+IRepository<Category, int> repository = new EFRepository<Category, int>(context);
+var servizioCategorie = new CategoriesDataService(repository);
 
-IOrdersNorthwindData ordersNorthwindData =
-    new OrdersNorthwindSQlServerData(context);
 
-//ICategoriesNorthwindData categoriesNorthwindData =
-//    new CategorieNorthwindSqlServerData(context);
+//var categories = repository.GetAll();
 
-IGenericNorthwindData<Category, int> categoriesGenericData =
-    new GenericNorthwindData<Category, int>(context);
+//var categories = await repository.Filter(x => x.CategoryName.Contains("Sea"));
+
+var categories = await servizioCategorie
+    .GetCategoriesAsync(x => x.CategoryName.Contains("Sea"));
+
+if(categories is not null)
+{
+    foreach (var category in categories)
+    {
+        Console.WriteLine(category.Nome);
+    }
+}
+
+//foreach (var category in categories)
+//{
+//    Console.WriteLine(category.CategoryName);
+//}
+
+
+//ICustomersNorthwindData data =
+//    new CustomersNorthwindSQlServerData(context);
+
+//IOrdersNorthwindData ordersNorthwindData =
+//    new OrdersNorthwindSQlServerData(context);
+
+////ICategoriesNorthwindData categoriesNorthwindData =
+////    new CategorieNorthwindSqlServerData(context);
+
+//IGenericNorthwindData<Category, int> categoriesGenericData =
+//    new GenericNorthwindData<Category, int>(context);
 
 
 //var ordine = await ordersNorthwindData.EstraiOrdine(10264);
@@ -91,12 +118,12 @@ IGenericNorthwindData<Category, int> categoriesGenericData =
 //    var x = categories.Where(x => x.CategoryName.Contains("Sea"));
 //}
 
-var categories =  categoriesGenericData.GetItems();
-if(categories is not null)
-{
-    var x = await categories
-        .Where(x => x.CategoryName.Contains("Sea"))
-        .ToListAsync();
-}
+//var categories =  categoriesGenericData.GetItems();
+//if(categories is not null)
+//{
+//    var x = await categories
+//        .Where(x => x.CategoryName.Contains("Sea"))
+//        .ToListAsync();
+//}
 
 Console.WriteLine("Fine programma");

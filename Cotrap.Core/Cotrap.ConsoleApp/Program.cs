@@ -27,20 +27,20 @@
 //    Console.WriteLine($"{item.Nome} {item.Cognome} - {item.DataNascita}");
 //}
 
-using Cotrap.Core.VideoGame.Implementations;
-using Cotrap.Core.VideoGame.Interfaces;
+//using Cotrap.Core.VideoGame.Implementations;
+//using Cotrap.Core.VideoGame.Interfaces;
 
-IGameParameters gameParameters = new GameParameters();
+//IGameParameters gameParameters = new GameParameters();
 
-IVisible visible = new Visible();
-ICollidable collidable = new Solid();
-IUpdatable updatable = new Movable(gameParameters);
+//IVisible visible = new Visible();
+//ICollidable collidable = new Solid();
+//IUpdatable updatable = new Movable(gameParameters);
 
-var gameBound = new GameParameters();
-var heman = new Warrior(visible, collidable, updatable) { X = 10, Y = 0, Z = 0};
-updatable.X = heman.X;
-updatable.Y = heman.Y;
-updatable.Z = heman.Z;
-heman.Paint();
-heman.Collide();
-heman.Update(1, 2, 3);
+//var gameBound = new GameParameters();
+//var heman = new Warrior(visible, collidable, updatable) { X = 10, Y = 0, Z = 0};
+//updatable.X = heman.X;
+//updatable.Y = heman.Y;
+//updatable.Z = heman.Z;
+//heman.Paint();
+//heman.Collide();
+//heman.Update(1, 2, 3);
