@@ -29,11 +29,18 @@
 
 using Cotrap.Core.VideoGame.Implementations;
 using Cotrap.Core.VideoGame.Interfaces;
+
+IGameParameters gameParameters = new GameParameters();
+
 IVisible visible = new Visible();
 ICollidable collidable = new Solid();
-IUpdatable updatable = new Movable();
+IUpdatable updatable = new Movable(gameParameters);
 
-var heman = new Warrior(visible, collidable, updatable);
+var gameBound = new GameParameters();
+var heman = new Warrior(visible, collidable, updatable) { X = 10, Y = 0, Z = 0};
+updatable.X = heman.X;
+updatable.Y = heman.Y;
+updatable.Z = heman.Z;
 heman.Paint();
 heman.Collide();
-heman.Update();
+heman.Update(1, 2, 3);
