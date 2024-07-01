@@ -9,8 +9,8 @@ public class CategoriaDTO : IEntity
     public string? Descrizione { get; set; }
 }
 
-//public class CategoriaCreaDTO
-//{
-//    public required string Nome { get; set; } 
-//    public string? Descrizione { get; set; }
-//}
+public class CategoriaCreaDTO
+{
+    public required string Nome { get; set; }
+    public string? Descrizione { get; set; }
+}

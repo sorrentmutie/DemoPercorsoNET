@@ -6,23 +6,48 @@ using Cotrap.Northwind;
 
 NorthwindContext context = new NorthwindContext();
 IRepository<Category, int> repository = new EFRepository<Category, int>(context);
-var servizioCategorie = new CategoriesDataService(repository);
+IRepository<Order, int> repositoryOrder = new EFRepository<Order, int>(context);
+IDataService< Order, OrdineDTO, OrdineCreaDTO, int> servizioOrdini = new ServizioOrdini(repositoryOrder);
+
+IRepository<Customer, string> repositoryCustomer = new EFRepository<Customer, string>(context);
+IDataService<Customer, CustomerDTO, CustomerCreaDTO, string> servizioCustomer = new ServizioCustomer(repositoryCustomer);
 
 
-//var categories = repository.GetAll();
+//var ordineId = await servizioOrdini.AddNewWithId(new OrdineCreaDTO() { CustomerId = "HANAR", OrderDate = DateTime.Now });
+//var ordini = await servizioOrdini.GetAsync(x => x.Id == ordineId);
+//if (ordini != null)
+//{
+//    foreach (var order in ordini)
+//    {
+//        Console.WriteLine($"{order.Id} {order.OrderDate}");
+//    }
+//}
 
-//var categories = await repository.Filter(x => x.CategoryName.Contains("Sea"));
 
-var categories = await servizioCategorie
-    .GetCategoriesAsync(x => x.CategoryName.Contains("Sea"));
 
-if(categories is not null)
-{
-    foreach (var category in categories)
-    {
-        Console.WriteLine(category.Nome);
-    }
-}
+//var nuovaCategoria = new CategoriaCreaDTO() { Nome = "Terra", Descrizione = "Prodotti di allevamento" };
+//var idCategoriaAggiunta = await servizioCategorie.AddNewCategoryWithId(nuovaCategoria);
+
+//var cat = await servizioCategorie.GetCategoriesAsyncById(idCategoriaAggiunta);
+//if(cat is not null)
+//{
+//    cat.Nome = "Allevamenti";
+//    await servizioCategorie.UpdateCategory(cat);
+//}
+
+
+//var categories = await servizioCategorie
+//    .GetCategoriesAsync(x => x.CategoryName.Contains("All"));
+
+
+
+//if(categories is not null)
+//{
+//    foreach (var category in categories)
+//    {
+//        Console.WriteLine(category.Nome);
+//    }
+//}
 
 //foreach (var category in categories)
 //{

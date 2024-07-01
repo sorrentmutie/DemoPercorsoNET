@@ -24,6 +24,14 @@ public class EFRepository<TEntity, TKey>
         dbContext.Entry(entity).State = EntityState.Detached;
     }
 
+    public async Task<TKey> CreateAsyncWithId(TEntity entity)
+    {
+        dbSet.Add(entity);
+        await dbContext.SaveChangesAsync();
+        dbContext.Entry(entity).State = EntityState.Detached;
+        return entity.Id;
+    }
+
     public async Task DeleteAsync(TKey id)
     {
         var entity = new TEntity { Id = id };

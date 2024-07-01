@@ -12,4 +12,5 @@ public interface IRepository<TEntity, TKey>
     Task CreateAsync(TEntity entity);
     Task UpdateAsync(TEntity entity);
     Task DeleteAsync(TKey id);
+    Task<TKey> CreateAsyncWithId(TEntity entity);
 }

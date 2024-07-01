@@ -12,7 +12,7 @@ public static class NorthwindExtensions
     {
         return customers.Select(c => new ClienteDTO
         {
-            Id = c.CustomerId,
+            Id = c.Id,
             Contatto = c.ContactName,
             IndirizzoCompleto =
             $"{c.Address} {c.City} {c.Region} {c.PostalCode} {c.Country}",

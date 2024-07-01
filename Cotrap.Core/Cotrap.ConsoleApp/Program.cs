@@ -1,7 +1,7 @@
 ﻿//using Cotrap.ConsoleApp;
 //using Cotrap.Core.Impiegati.Interfacce;
 
-//Console.WriteLine("Ciao");
+Console.WriteLine("Ciao");
 
 //var impiegati = new List<Impiegato>()
 //{ new Impiegato {  Cognome = "Rossi", DataNascita = DateTime.Today.AddYears(-30) , Nome = "Mario",

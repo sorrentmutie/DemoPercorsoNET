@@ -20,7 +20,7 @@ public class OrdersNorthwindSQlServerData : IOrdersNorthwindData
         var order = await northwindContext.Orders
             .Include(o => o.OrderDetails)
             .ThenInclude(od => od.Product)
-            .FirstOrDefaultAsync(y => y.OrderId == orderId);
+            .FirstOrDefaultAsync(y => y.Id == orderId);
 
         northwindContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
 
@@ -29,7 +29,7 @@ public class OrdersNorthwindSQlServerData : IOrdersNorthwindData
         return new OrdineDTO
         {
             CustomerId = order.CustomerId,
-            Id = order.OrderId,
+            Id = order.Id,
             OrderDate = order.OrderDate,
             Voci = order.OrderDetails.Select(od => new VoceOrdineDTO
             {
