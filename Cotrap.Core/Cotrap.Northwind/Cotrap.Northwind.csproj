@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Cotrap.Core\Cotrap.Core.csproj" />
     <ProjectReference Include="..\Cotrap.Data\Cotrap.Data.csproj" />
   </ItemGroup>

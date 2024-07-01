@@ -1,4 +1,5 @@
-﻿using Cotrap.Core.Interfacce;
+﻿using AutoMapper;
+using Cotrap.Core.Interfacce;
 using Cotrap.Core.Northwind.DTO;
 using System.Linq.Expressions;
 
@@ -8,21 +9,27 @@ namespace Cotrap.Northwind;
 public class ServizioOrdini : IDataService<Order, OrdineDTO, OrdineCreaDTO, int>
 {
     private readonly IRepository<Order, int> repository;
+    private readonly IMapper mapper;
 
-    public ServizioOrdini(IRepository<Order, int> repository)
+    public ServizioOrdini(
+        IRepository<Order, int> repository,
+        IMapper mapper)
     {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     public async Task AddNew(OrdineCreaDTO ordineDTO)
     {
-        var ordine = new Order() { CustomerId = ordineDTO.CustomerId, OrderDate = ordineDTO.OrderDate };
+        //var ordine = new Order() { CustomerId = ordineDTO.CustomerId, OrderDate = ordineDTO.OrderDate };
+        var ordine = mapper.Map<Order>(ordineDTO);
         await repository.CreateAsync(ordine);
     }
 
     public async Task<int> AddNewWithId(OrdineCreaDTO ordineDto)
     {
-        var ordine = new Order() { CustomerId = ordineDto.CustomerId, OrderDate = ordineDto.OrderDate };
+        // var ordine = new Order() { CustomerId = ordineDto.CustomerId, OrderDate = ordineDto.OrderDate };
+        var ordine = mapper.Map<Order>(ordineDto);
         var id = await repository.CreateAsyncWithId(ordine);
         return id;
     }
@@ -42,7 +49,9 @@ public class ServizioOrdini : IDataService<Order, OrdineDTO, OrdineCreaDTO, int>
         {
             if (ord is null) continue;
 
-            ordiniDto.Add(new OrdineDTO() { Id = ord.Id, CustomerId = ord.CustomerId, OrderDate = ord.OrderDate });
+            ordiniDto.Add(mapper.Map<OrdineDTO>(ord));  
+
+           // ordiniDto.Add(new OrdineDTO() { Id = ord.Id, CustomerId = ord.CustomerId, OrderDate = ord.OrderDate });
         }
 
         return ordiniDto;
@@ -53,7 +62,9 @@ public class ServizioOrdini : IDataService<Order, OrdineDTO, OrdineCreaDTO, int>
         var x = await repository.GetByIdAsync(Id);
         if (x is null) return null;
 
-        return new OrdineDTO() { Id = x.Id, CustomerId = x.CustomerId, OrderDate = x.OrderDate };
+        return mapper.Map<OrdineDTO>(x);
+
+       // return new OrdineDTO() { Id = x.Id, CustomerId = x.CustomerId, OrderDate = x.OrderDate };
     }
 
     public async Task Update(OrdineDTO ordineDto)

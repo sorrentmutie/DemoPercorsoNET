@@ -1,5 +1,6 @@
 ﻿
 
+using AutoMapper;
 using Cotrap.Core.Interfacce;
 using Cotrap.Data.Models;
 using Cotrap.Northwind;
@@ -7,21 +8,26 @@ using Cotrap.Northwind;
 NorthwindContext context = new NorthwindContext();
 IRepository<Category, int> repository = new EFRepository<Category, int>(context);
 IRepository<Order, int> repositoryOrder = new EFRepository<Order, int>(context);
-IDataService< Order, OrdineDTO, OrdineCreaDTO, int> servizioOrdini = new ServizioOrdini(repositoryOrder);
+IMapper mapper = new Mapper(
+    new MapperConfiguration(
+        cfg => cfg.AddProfile<AutoMapperProfile>()));
+
+IDataService<Order, OrdineDTO, OrdineCreaDTO, int> 
+    servizioOrdini = new ServizioOrdini(repositoryOrder, mapper);
 
 IRepository<Customer, string> repositoryCustomer = new EFRepository<Customer, string>(context);
 IDataService<Customer, CustomerDTO, CustomerCreaDTO, string> servizioCustomer = new ServizioCustomer(repositoryCustomer);
 
 
-//var ordineId = await servizioOrdini.AddNewWithId(new OrdineCreaDTO() { CustomerId = "HANAR", OrderDate = DateTime.Now });
-//var ordini = await servizioOrdini.GetAsync(x => x.Id == ordineId);
-//if (ordini != null)
-//{
-//    foreach (var order in ordini)
-//    {
-//        Console.WriteLine($"{order.Id} {order.OrderDate}");
-//    }
-//}
+var ordineId = await servizioOrdini.AddNewWithId(new OrdineCreaDTO() { CustomerId = "HANAR", OrderDate = DateTime.Now });
+var ordini = await servizioOrdini.GetAsync(x => x.Id == ordineId);
+if (ordini != null)
+{
+    foreach (var order in ordini)
+    {
+        Console.WriteLine($"{order.Id} {order.OrderDate}");
+    }
+}
 
 
 
