@@ -1,0 +1,6 @@
+@Cotrap.API_HostAddress = http://localhost:5191
+
+GET {{Cotrap.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

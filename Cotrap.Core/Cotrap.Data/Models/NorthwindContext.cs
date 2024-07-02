@@ -46,8 +46,8 @@ public partial class NorthwindContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        optionsBuilder.EnableSensitiveDataLogging();
-        optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=Northwind;Integrated Security=True").LogTo(Console.WriteLine);
+        //optionsBuilder.EnableSensitiveDataLogging();
+        //optionsBuilder.UseSqlServer("Data Source=(localdb)\\mssqllocaldb;Initial Catalog=Northwind;Integrated Security=True").LogTo(Console.WriteLine);
 
     }
 

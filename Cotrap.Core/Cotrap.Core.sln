@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cotrap.Test", "Cotrap.Test\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalisiTesto", "AnalisiTesto\AnalisiTesto.csproj", "{1E0AF1C2-0F3B-48A7-B650-DBA334BD0C68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cotrap.Data", "Cotrap.Data\Cotrap.Data.csproj", "{13E877AF-B27D-46B0-9307-F5AE34D94949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cotrap.Data", "Cotrap.Data\Cotrap.Data.csproj", "{13E877AF-B27D-46B0-9307-F5AE34D94949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cotrap.Northwind", "Cotrap.Northwind\Cotrap.Northwind.csproj", "{28FAAC38-5356-4278-B18C-876737EE1463}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cotrap.Northwind", "Cotrap.Northwind\Cotrap.Northwind.csproj", "{28FAAC38-5356-4278-B18C-876737EE1463}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cotrap.Entity.CodeFirst", "Cotrap.Entity.CodeFirst\Cotrap.Entity.CodeFirst.csproj", "{D2D2B161-C1F2-4FF3-9496-CBC3F4A7E71B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cotrap.Entity.CodeFirst", "Cotrap.Entity.CodeFirst\Cotrap.Entity.CodeFirst.csproj", "{D2D2B161-C1F2-4FF3-9496-CBC3F4A7E71B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cotrap.API", "Cotrap.API\Cotrap.API.csproj", "{D60CE6D9-BE5F-4767-AEE8-C5E18F4BF99D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{D2D2B161-C1F2-4FF3-9496-CBC3F4A7E71B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2D2B161-C1F2-4FF3-9496-CBC3F4A7E71B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2D2B161-C1F2-4FF3-9496-CBC3F4A7E71B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D60CE6D9-BE5F-4767-AEE8-C5E18F4BF99D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60CE6D9-BE5F-4767-AEE8-C5E18F4BF99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60CE6D9-BE5F-4767-AEE8-C5E18F4BF99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60CE6D9-BE5F-4767-AEE8-C5E18F4BF99D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
