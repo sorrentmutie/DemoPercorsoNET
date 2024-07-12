@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Reflection;
+using Cotrap.Core.Northwind.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,8 +54,11 @@ customersGroup.MapGet("/", async (IDataService<Customer, CustomerDTO, CustomerCr
    
 });
 
-customersGroup.MapGet("/{id}", async (string id, IDataService<Customer, CustomerDTO, CustomerCreaDTO, string> service) => 
-   await service.GetAsyncById(id) is CustomerDTO cust ?
+//customersGroup.MapGet("/{id}", async (string id, IDataService<Customer, CustomerDTO, CustomerCreaDTO, string> service) => 
+//   await service.GetAsyncById(id) is CustomerDTO cust ?
+//      Results.Ok(cust) : Results.NotFound());
+customersGroup.MapGet("/{id}", async (string id, ICustomerData service) =>
+   await service.GetCustomerDetailById(id) is ClienteDettagliato cust ?
       Results.Ok(cust) : Results.NotFound());
 
 customersGroup.MapPost("/", async (CustomerCreaDTO customer, IDataService<Customer, CustomerDTO, CustomerCreaDTO, string> service) =>
@@ -113,4 +117,5 @@ static void RegistraServizi(WebApplicationBuilder builder)
     builder.Services.AddScoped<IRepository<Customer, string>, EFRepository<Customer, string>>();
     builder.Services.AddScoped<IDataService<Order, OrdineDTO, OrdineCreaDTO, int>, ServizioOrdiniAPI>();
     builder.Services.AddScoped<IDataService<Customer, CustomerDTO, CustomerCreaDTO, string>, ServizioCustomerAPI>();
+    builder.Services.AddScoped<ICustomerData, ServizioDatiCliente>();
 }
