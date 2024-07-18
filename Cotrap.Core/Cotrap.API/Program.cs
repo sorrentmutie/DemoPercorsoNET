@@ -1,10 +1,4 @@
-using AutoMapper;
-using Cotrap.Data.Northwind.Models;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System.Reflection;
-using Cotrap.Core.Northwind.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +10,16 @@ builder.Services.AddDbContext<NorthwindContext>(options =>
 builder.Services.AddScoped<DbContext, NorthwindContext>();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly); // Register AutoMapper using the Cotrap.API assembly
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
 
 RegistraServizi(builder);
 
@@ -32,6 +36,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors();
 
 app.UseExceptionHandler(ex =>
 {
